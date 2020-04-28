@@ -20,8 +20,6 @@ class RealInterceptorChain(val interceptors: List<Interceptor>, val index: Int, 
 
     override fun proceed(requests: Requests): Response {
 
-        if (index >= interceptors.size) throw AssertionError()
-
         val next = RealInterceptorChain(interceptors, index + 1, requests)
         val interceptor = interceptors[index]
         val response = interceptor.intercept(next)
